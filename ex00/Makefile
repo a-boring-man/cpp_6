@@ -6,21 +6,21 @@
 #    By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 09:02:49 by jrinna            #+#    #+#              #
-#    Updated: 2022/10/11 09:28:58 by jrinna           ###   ########lyon.fr    #
+#    Updated: 2022/10/11 12:56:49 by jrinna           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-LST_SRC :=
-LST_INC :=
+LST_SRC := main.cpp
+LST_INC := main.hpp
 LST_OBJ := ${LST_SRC:.cpp=.o}
 
 DIR_SRC := source
 DIR_INC := include
 DIR_OBJ := .object
 
-SRC := ${addprefix {${DIR_SRC}/,${LST_SRC}}}
-INC := ${addprefix {${DIR_INC}/,${LST_INC}}}
-OBJ := ${addprefix {${DIR_OBJ}/,${LST_OBJ}}}
+SRC := ${addprefix ${DIR_SRC}/,${LST_SRC}}
+INC := ${addprefix ${DIR_INC}/,${LST_INC}}
+OBJ := ${addprefix ${DIR_OBJ}/,${LST_OBJ}}
 
 CC := c++ -std=c++98
 CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
