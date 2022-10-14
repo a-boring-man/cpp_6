@@ -6,7 +6,7 @@
 /*   By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:52:42 by jrinna            #+#    #+#             */
-/*   Updated: 2022/10/14 10:04:04 by jrinna           ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 15:21:39 by jrinna           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_display_char(int i, string input) {
 			cout << "impossible" << endl;
 			break;
 		}
-		if (input.compare("nan") || input.compare("+inf") || input.compare("-inf"))
+		if (!input.compare("nan") || !input.compare("+inf") || !input.compare("-inf"))
 		{
 			cout << "impossible" << endl;
 			break;
@@ -193,7 +193,7 @@ void	ft_display_int(int i, string input) {
 			cout << "impossible" << endl;
 			break;
 		}
-		if (input.compare("nan") || input.compare("+inf") || input.compare("-inf"))
+		if (!input.compare("nan") || !input.compare("+inf") || !input.compare("-inf"))
 		{
 			cout << "impossible" << endl;
 			break;
