@@ -6,7 +6,7 @@
 /*   By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:52:42 by jrinna            #+#    #+#             */
-/*   Updated: 2022/10/13 15:21:40 by jrinna           ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 10:04:04 by jrinna           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,11 @@ int	ft_is_char( string input ) {
 	return (0);
 }
 
-int	ft_is_int( string input ){
+int	ft_what_type( string input ) {
 
-	const int	tbl[3][5] = {{1, -1, -1, -1, -1}, {2, 4, 4, -1, 4}, {3, 4, 4, -1, 4}};
-	int			cs = 0;
-
-	for (size_t i = 0; cs > -1 && input.length() > i && input.at(i); i++)
-	{
-		if (input.at(i) == '-')
-			cs = tbl[0][cs];
-		else if (input.at(i) >= '1' && input.at(i) <= '9')
-			cs = tbl[1][cs];
-		else if (input.at(i) == '0')
-			cs = tbl[2][cs];
-		else
-			cs = -1;
-	}
-	if (cs > 1)
-		return (1);
-	return (0);
-}
-
-int	ft_is_float( string input ){
-
-	const int	tbl[5][8] = {{1, -1, 1, 6, 6, -1, -1, -1}, \
-	{2, -1, -1, -1, -1, -1, -1, -1}, {3, 5, 3, 3, -1, 5, 5, -1}, \
-	{4, 5, 4, 3, -1, 5, 5, -1}, {5, -1, -1, -1, -1, 7, 7, -1}};
+	const int	tbl[4][7] = {{1, -1, 1, 4, -1, -1, -1}, \
+	{2, -1, -1, -1, -1, -1, -1}, {3, 5, 3, 3, 5, 5, -1}, \
+	{-1, -1, -1, -1, 6, 6, -1}};
 	int			cs = 0;
 
 	for (size_t i = 0; cs > -1 && input.length() > i && input.at(i); i++)
@@ -54,42 +33,19 @@ int	ft_is_float( string input ){
 			cs = tbl[0][cs];
 		else if (input.at(i) == '-')
 			cs = tbl[1][cs];
-		else if (input.at(i) >= '1' && input.at(i) <= '9')
+		else if (input.at(i) >= '0' && input.at(i) <= '9')
 			cs = tbl[2][cs];
-		else if (input.at(i) == '0')
-			cs = tbl[3][cs];
 		else if (input.at(i) == 'f')
-			cs = tbl[4][cs];
-		else
-			cs = -1;
-	}
-	if (cs > 6 || !input.compare("-inff") || !input.compare("+inff") || !input.compare("nanf"))
-		return (1);
-	return (0);
-}
-
-int	ft_is_double( string input ){
-
-	const int	tbl[4][7] = {{1, -1, 1, 6, 6, -1, -1}, \
-	{2, -1, -1, -1, -1, -1, -1}, {3, 5, 3, 3, -1, 5, 5}, \
-	{4, 5, 4, 3, -1, 5, 5}};
-	int			cs = 0;
-
-	for (size_t i = 0; cs > -1 && input.length() > i && input.at(i); i++)
-	{
-		if (input.at(i) == '.')
-			cs = tbl[0][cs];
-		else if (input.at(i) == '-')
-			cs = tbl[1][cs];
-		else if (input.at(i) >= '1' && input.at(i) <= '9')
-			cs = tbl[2][cs];
-		else if (input.at(i) == '0')
 			cs = tbl[3][cs];
 		else
 			cs = -1;
 	}
-	if (cs > 4 || !input.compare("-inf") || !input.compare("+inf") || !input.compare("nan") )
+	if (cs == 3)
 		return (1);
+	if (cs == 6 || !input.compare("-inff") || !input.compare("+inff") || !input.compare("nanf"))
+		return (2);
+	if (cs == 4 || cs == 5 || !input.compare("-inf") || !input.compare("+inf") || !input.compare("nan"))
+		return (3);
 	return (0);
 }
 
@@ -133,6 +89,11 @@ void	ft_display_char(int i, string input) {
 			cout << "impossible" << endl;
 			break;
 		}
+		if (!input.compare("nanf") || !input.compare("+inff") || !input.compare("-inff"))
+		{
+			cout << "impossible" << endl;
+			break;
+		}
 		fc = stof(input);
 		if ((fc > 31 && fc < 127) || (fc > 8 && fc < 14))
 			cout << "char : '" << static_cast<char>(fc) << "'" << endl;
@@ -148,6 +109,11 @@ void	ft_display_char(int i, string input) {
 			stod(input);
 		}
 		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		if (input.compare("nan") || input.compare("+inf") || input.compare("-inf"))
 		{
 			cout << "impossible" << endl;
 			break;
@@ -203,6 +169,11 @@ void	ft_display_int(int i, string input) {
 			cout << "impossible" << endl;
 			break;
 		}
+		if (!input.compare("nanf") || !input.compare("+inff") || !input.compare("-inff"))
+		{
+			cout << "impossible" << endl;
+			break;
+		}
 		fi = stof(input);
 		if (fi < INT_MIN || fi > INT_MAX)
 		{
@@ -218,6 +189,11 @@ void	ft_display_int(int i, string input) {
 			stod(input);
 		}
 		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		if (input.compare("nan") || input.compare("+inf") || input.compare("-inf"))
 		{
 			cout << "impossible" << endl;
 			break;
@@ -245,10 +221,20 @@ void	ft_display_float(int i, string input) {
 	switch (i)
 	{
 	case 0: // char to float
+		cout.precision(9);
 		cout << "float : " << static_cast<float>(input.at(1)) << endl;
 		break;
 	
 	case 1: // int to float
+		try
+		{
+			stoi(input);
+		}
+		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
 		try
 		{
 			stof(input);
@@ -259,6 +245,7 @@ void	ft_display_float(int i, string input) {
 			break;
 		}
 		itf = stof(input);
+		cout.precision(9);
 		cout << "float : " << itf << endl;
 		break;
 
@@ -273,6 +260,22 @@ void	ft_display_float(int i, string input) {
 			break;
 		}
 		ftf = stof(input);
+		cout.precision(9);
+		if (!input.compare("nan") || !input.compare("nanf"))
+		{
+			cout << "base type : float : nanf" << endl;
+			break;
+		}
+		else if (!input.compare("+inf") || !input.compare("+inff"))
+		{
+			cout << "base type : float : +inff" << endl;
+			break;
+		}
+		else if (!input.compare("-inf") || !input.compare("-inff"))
+		{
+			cout << "base type : float : -inff" << endl;
+			break;
+		}
 		cout << "base type : float : " << ftf << endl;
 		break;
 
@@ -286,13 +289,140 @@ void	ft_display_float(int i, string input) {
 			cout << "impossible" << endl;
 			break;
 		}
+		if (!input.compare("nan") || !input.compare("nanf"))
+		{
+			cout << "float : nanf" << endl;
+			break;
+		}
+		else if (!input.compare("+inf") || !input.compare("+inff"))
+		{
+			cout << "float : +inff" << endl;
+			break;
+		}
+		else if (!input.compare("-inf") || !input.compare("-inff"))
+		{
+			cout << "flaot : -inff" << endl;
+			break;
+		}
 		dtf = stod(input);
 		if (dtf < -FLT_MAX || dtf > FLT_MAX)
 		{
 			cout << "impossible" << endl;
 			break;
 		}
+		cout.precision(9);
 		cout << "float : " << static_cast<float>(dtf) << endl;
+		break;
+
+	default:
+		break;
+	}
+	return;
+}
+
+void	ft_display_double( int i, string input ) {
+
+	int		id;
+	float	fd;
+	double	dd;
+	switch (i)
+	{
+	case 0: // char to double
+		cout.precision(17);
+		cout << "double : " << static_cast<double>(input.at(1)) << endl;
+		break;
+	
+	case 1: // int to double
+		try
+		{
+			stoi(input);
+		}
+		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		try
+		{
+			stod(input);
+		}
+		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		id = stod(input);
+		cout.precision(17);
+		cout << "double : " << id << endl;
+		break;
+
+	case 2: // float to double
+		try
+		{
+			stof(input);
+		}
+		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		try
+		{
+			stod(input);
+		}
+		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		if (!input.compare("nanf") || !input.compare("nan"))
+		{
+			cout << "double : nan" << endl;
+			break;
+		}
+		else if (!input.compare("+inff") || !input.compare("+inf"))
+		{
+			cout << "double : +inf" << endl;
+			break;
+		}
+		else if (!input.compare("-inff") || !input.compare("-inf"))
+		{
+			cout << "double : -inf" << endl;
+			break;
+		}
+		fd = stod(input);
+		cout.precision(17);
+		cout << "double : " << static_cast<double>(fd) << endl;
+		break;
+
+	case 3: // double to double
+		try
+		{
+			stod(input);
+		}
+		catch(const std::exception& e)
+		{
+			cout << "impossible" << endl;
+			break;
+		}
+		if (!input.compare("nan") || !input.compare("nanf"))
+		{
+			cout << "base type : double : nan" << endl;
+			break;
+		}
+		else if (!input.compare("+inf") || !input.compare("+inff"))
+		{
+			cout << "base type : double : +inf" << endl;
+			break;
+		}
+		else if (!input.compare("-inf") || !input.compare("-inff"))
+		{
+			cout << "base type : double : -inf" << endl;
+			break;
+		}
+		dd = stod(input);
+		cout.precision(17);
+		cout << "base type : double : " << dd << endl;
 		break;
 
 	default:
@@ -309,18 +439,13 @@ int main( int ac, char **av ) {
 		return (1);
 	}
 
-	int 	(* f [4])(string input) = {&ft_is_char, &ft_is_int, &ft_is_float, &ft_is_double};
 	string	input = av[1];
 	bool	result[4] = {0, 0, 0, 0};
 	int 	i = 0;
 
-	for (int i = 0; i < 4; i++)
-	{
-		if ( f[i]( input ) )
-		{
-			result[i] = 1;
-		}
-	}
+	result[0] = ft_is_char(input);
+	if (ft_what_type(input))
+		result[ft_what_type(input)] = 1;
 	while (i < 4 && !result[i])
 		i++;
 	if (i == 4)
@@ -331,7 +456,7 @@ int main( int ac, char **av ) {
 	ft_display_char(i, input);
 	ft_display_int(i, input);
 	ft_display_float(i, input);
-	//ft_display_double(result, input);
+	ft_display_double(i, input);
 
 	return (0);
 }
