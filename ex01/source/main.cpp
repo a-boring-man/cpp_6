@@ -6,7 +6,7 @@
 /*   By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:52:42 by jrinna            #+#    #+#             */
-/*   Updated: 2022/10/14 14:36:53 by jrinna           ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 08:24:20 by jrinna           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int main( void ) {
 	uintptr_t	P;
 	P = serialize(&D);
 	cout << &D << endl << D.a << endl << D.b << endl;
-	cout << P << endl;
+	//cout << P << endl;
 	cout << deserialize(P) << endl << deserialize(P)->a << endl << deserialize(P)->b << endl;
 	return (0);
 }
