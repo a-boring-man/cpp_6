@@ -6,18 +6,18 @@
 /*   By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:52:42 by jrinna            #+#    #+#             */
-/*   Updated: 2022/10/17 08:24:20 by jrinna           ###   ########lyon.fr   */
+/*   Updated: 2023/07/19 12:20:37 by jrinna           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/main.hpp"
 
-uintptr_t serialize(Data* ptr) {
+__intptr_t serialize(Data* ptr) {
 
-	return (reinterpret_cast<uintptr_t>(ptr));
+	return (reinterpret_cast<__intptr_t>(ptr));
 }
 
-Data* deserialize(uintptr_t raw) {
+Data* deserialize(__intptr_t raw) {
 
 	return (reinterpret_cast<Data*>(raw));
 }
@@ -25,7 +25,7 @@ Data* deserialize(uintptr_t raw) {
 int main( void ) {
 
 	Data 		D;
-	uintptr_t	P;
+	__intptr_t	P;
 	P = serialize(&D);
 	cout << &D << endl << D.a << endl << D.b << endl;
 	//cout << P << endl;

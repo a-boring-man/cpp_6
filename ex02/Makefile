@@ -6,7 +6,7 @@
 #    By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/11 09:02:49 by jrinna            #+#    #+#              #
-#    Updated: 2022/10/14 14:39:29 by jrinna           ###   ########lyon.fr    #
+#    Updated: 2023/07/19 12:21:15 by jrinna           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC := ${addprefix ${DIR_SRC}/,${LST_SRC}}
 INC := ${addprefix ${DIR_INC}/,${LST_INC}}
 OBJ := ${addprefix ${DIR_OBJ}/,${LST_OBJ}}
 
-CC := c++ -std=c++98
+CC := c++ #-std=c++98
 CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 NAME := Identity_problem
 

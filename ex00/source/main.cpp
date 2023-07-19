@@ -6,7 +6,7 @@
 /*   By: jrinna <jrinna@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 11:52:42 by jrinna            #+#    #+#             */
-/*   Updated: 2022/10/14 15:21:39 by jrinna           ###   ########lyon.fr   */
+/*   Updated: 2023/07/19 12:23:31 by jrinna           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	ft_display_int(int i, string input) {
 			break;
 		}
 		fi = stof(input);
-		if (fi < INT_MIN || fi > INT_MAX)
+		if (static_cast<int>(fi) < INT_MIN || static_cast<int>(fi) > INT_MAX)
 		{
 			cout << "impossible" << endl;
 			break;
